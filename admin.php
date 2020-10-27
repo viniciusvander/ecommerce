@@ -41,7 +41,7 @@ $app->get('/admin/logout', function() {
 
 });
 
-$app->get("/admin/users", function() {
+/*$app->get("/admin/users", function() {
 
 	User::verifyLogin();
 
@@ -53,7 +53,7 @@ $app->get("/admin/users", function() {
 		"users"=>$users
 	));
 
-});
+});*/
 
 $app->get("/admin/forgot", function() {
 
