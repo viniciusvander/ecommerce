@@ -35,11 +35,11 @@ $app->get("/admin/users", function() {
 
 	$page = new PageAdmin();
 
-	$page->setTpl("users", array(
+	$page->setTpl("users", [
 		"users"=>$pagination['data'],
 		"search"=>$search,
 		"pages"=>$pages
-	));
+	]);
 });
 
 $app->get("/admin/users/create", function() {
