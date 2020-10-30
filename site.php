@@ -150,9 +150,10 @@ $app->get("/checkout", function(){
 
 	$cart = Cart::getFromSession();
 
-	if(isset($_GET['zipcode'])) {
+	if (!isset($_GET['zipcode'])) {
 
-		$_GET['zipcode'] = $cart->getdeszipcode(); 
+		$_GET['zipcode'] = $cart->getdeszipcode();
+
 	}
 
 	if(isset($_GET['zipcode'])) {
@@ -164,9 +165,11 @@ $app->get("/checkout", function(){
 		$cart->save();
 
 		$cart->getCalculateTotal();
+			
 	}
 
 	if (!$address->getdesaddress()) $address->setdesaddress('');
+	if (!$address->getdesnumber()) $address->setdesnumber('');
 	if (!$address->getdescomplement()) $address->setdescomplement('');
 	if (!$address->getdesdistrict()) $address->setdesdistrict('');
 	if (!$address->getdescity()) $address->setdescity('');
@@ -197,6 +200,12 @@ $app->post("/checkout", function(){
 
 	if (!isset($_POST['desaddress']) || $_POST['desaddress'] === '') {
 		Address::setMsgError("Informe o endereço.");
+		header('Location: /checkout');
+		exit;		
+	}
+
+	if (!isset($_POST['desnumber']) || $_POST['desnumber'] === '') {
+		Address::setMsgError("Informe o número.");
 		header('Location: /checkout');
 		exit;		
 	}
